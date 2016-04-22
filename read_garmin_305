@@ -1,18 +1,34 @@
 #!/bin/sh
 
-GARMIN_PATH="/home/klaus/Documents/garmin"
+USER="klaus"
+
+GARMIN_PATH="/home/${USER}/Documents/garmin"
 OUTPUT_PATH="${GARMIN_PATH}/output"
 LOG="${GARMIN_PATH}/output/log.txt"
 
+if [ ! -d "${GARMIN_PATH}" ]; then
+ 	mkdir -p "${GARMIN_PATH}" 
+fi
+
+if [ ! -d "${OUTPUT_PATH}" ]; then
+  	mkdir -p "${OUTPUT_PATH}"
+fi
+
+echo "Start Script $(date +"%d.%m.%Y %T") $(whoami)" >> ${LOG} 2>&1
+
+
 cd "${GARMIN_PATH}"
-garmin_save_runs >> ${LOG}
+garmin_save_runs >> ${LOG} 2>&1
 
 
+echo "find files" >> ${LOG}
 for file in $(find "${GARMIN_PATH}"  -name '*.gmn' -amin -10);  
 do
     printf '%s\n' "$file" >> ${LOG}
     /usr/local/bin/gmn2tcx "${file}" > "${OUTPUT_PATH}/$(basename ${file} .gmn).tcx" 2>> ${LOG}
 done
 
+echo "chown" >> ${LOG}
 
+chown ${USER}:${USER} "${GARMIN_PATH}" -R 2>> ${LOG}
 
