@@ -23,6 +23,9 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 
+# install some dependencies
+#sudo apt-get install libxml2-utils libsaxonb-java garmin-forerunner-tools
+
 set -o pipefail
 
 # validate the given xml against garmin's
@@ -61,4 +64,6 @@ function do_dump {
 }
  
 # invoke xslt processor creating a TCX containg data from all provided .mgn files
-`dirname $0`/saxon-xslt <(do_dump "$@") `dirname $0`/gmn2tcx.xslt | validate_xml
+
+/usr/bin/saxonb-xslt <(do_dump "$@") `dirname $0`/gmn2tcx.xslt | validate_xml
+#`dirname $0`/saxon-xslt <(do_dump "$@") `dirname $0`/gmn2tcx.xslt | validate_xml

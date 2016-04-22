@@ -1,0 +1,1 @@
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="091e", ATTRS{idProduct}=="0003",  RUN+="/usr/local/bin/read_garmin_305"

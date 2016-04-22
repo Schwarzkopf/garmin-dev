@@ -1,0 +1,18 @@
+#!/bin/sh
+
+GARMIN_PATH="/home/klaus/Documents/garmin"
+OUTPUT_PATH="${GARMIN_PATH}/output"
+LOG="${GARMIN_PATH}/output/log.txt"
+
+cd "${GARMIN_PATH}"
+garmin_save_runs >> ${LOG}
+
+
+for file in $(find "${GARMIN_PATH}"  -name '*.gmn' -atime -10);  
+do
+    printf '%s\n' "$file" >> ${LOG}
+    /usr/local/bin/gmn2tcx "${file}" > "${OUTPUT_PATH}/$(basename ${file} .gmn).tcx" 2>> ${LOG}
+done
+
+
+
