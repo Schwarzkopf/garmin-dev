@@ -22,4 +22,4 @@ sudo mv tcx.xsd /usr/local/bin/
 sudo mv read_garmin_305 /usr/local/bin/
 sudo mv 70-usb-custom.rules /etc/udev/rules.d/
 ```
-Edit /usr/local/bin/read_garmin_305 
+Edit /usr/local/bin/read_garmin_305 and make your own changes

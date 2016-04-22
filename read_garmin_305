@@ -8,7 +8,7 @@ cd "${GARMIN_PATH}"
 garmin_save_runs >> ${LOG}
 
 
-for file in $(find "${GARMIN_PATH}"  -name '*.gmn' -atime -10);  
+for file in $(find "${GARMIN_PATH}"  -name '*.gmn' -amin -10);  
 do
     printf '%s\n' "$file" >> ${LOG}
     /usr/local/bin/gmn2tcx "${file}" > "${OUTPUT_PATH}/$(basename ${file} .gmn).tcx" 2>> ${LOG}
