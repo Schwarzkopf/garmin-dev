@@ -8,7 +8,7 @@ I have not developed the whole code in this repository, just the glue.  However,
 for the free distribution of the contents as far as I can tell.  If this is not
 the case, please let me know and I will take appropriate actions.
 
-Ubuntu 14.04
+Ubuntu
 ------------
 Install used packages
 ```
@@ -23,3 +23,9 @@ sudo mv read_garmin_305 /usr/local/bin/
 sudo mv 70-usb-custom.rules /etc/udev/rules.d/
 ```
 Edit /usr/local/bin/read_garmin_305 and make your own changes
+
+Increase the JVM memory allocation in file /usr/bin/saxonb-xslt 
+
+```
+exec java -Xmx1024m -classpath /usr/share/java/saxonb.jar net.sf.saxon.Transform "$@"
+```
